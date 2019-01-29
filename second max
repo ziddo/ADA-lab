@@ -1,0 +1,92 @@
+#include<iostream>
+using namespace std;
+struct node{
+int data;
+struct node *left,*right,*up;
+};
+void insert1(struct node **,int );
+int search(struct node *);
+int main(){
+struct node *start=NULL;
+int i;
+for(i=0;i<8;i++){
+    int k;
+    cout<<"enter key\n";
+    cin>>k;
+    insert1(&start,k);
+}
+
+int p=search(start);
+cout<<"\nsecond max="<<p;
+}
+void insert1(struct node **ps,int x){
+struct node *p;
+p=(struct node *)malloc(sizeof(struct node));
+p->data=x;
+p->left=NULL;
+p->right=NULL;
+if(*ps==NULL){
+    *ps=p;
+    p->up=NULL;
+    return ;
+}
+struct node *temp,*prev=NULL;
+temp=*ps;
+while(temp!=NULL){
+        prev=temp;
+    if(x>temp->data){
+        temp=temp->right;
+    }
+    else{
+        temp=temp->left;
+    }
+}
+p->up=prev;
+if(x>prev->data){
+    prev->right=p;
+}
+else{
+    prev->left=p;
+}
+}
+
+
+
+int search(struct node *p){
+struct node *temp=p,*prev=NULL;
+while(temp->right!=NULL){
+      temp=temp->right;
+   }
+   cout<<"max element=\n"<<temp->data;
+/*if(temp==NULL){
+    cout<<"Node not found\n";
+    return 0;
+  }*/
+//  else{
+    if(temp->left!=NULL){
+        temp=temp->left;
+        while(temp->right!=NULL){
+            temp=temp->right;
+        }
+        return temp->data;
+    }
+    
+    else{
+        prev=temp->up;
+        while(temp!=prev->right&&prev!=NULL){
+            temp=prev;
+            prev=prev->up;
+        }
+        if(prev!=NULL){
+            return prev->data;
+        }
+        else{
+            cout<<"Node does not have succe\n";
+            exit ;
+      }
+  //  }
+
+
+  }
+
+}
