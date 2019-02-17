@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+int fib(int ,int []);
+int main(){
+    int n;
+    cin>>n;
+    int a[n+1]={0},i;
+    cout<<"nth term of series="<<fib(n,a);
+}
+int fib(int n,int arr[]){
+    int result;
+    if(arr[n]!=0){
+        return arr[n];
+    }
+     if(n==1 || n==2)
+      result=1;
+     else
+     result=fib(n-1,arr)+fib(n-2,arr);
+     arr[n]=result;
+     return result;
+    
+}
