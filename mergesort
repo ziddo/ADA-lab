@@ -1,0 +1,51 @@
+#include<iostream>
+using namespace std;
+void mergesort(int [],int ,int );
+void merge(int [],int [],int ,int ,int );
+int b[14],countmerge=0,countmergesort=0;
+int main(){
+    int a[]={9,-5,17,2,13,2,3,4,45,17,28,-43,6,1};
+    mergesort(a,0,13);
+    for(int i=0;i<14;i++){
+        cout<<a[i]<<endl;
+    }
+}
+void mergesort(int a[],int low,int high){
+    countmergesort++;
+    if(low<high){
+        int mid=(low+high)/2;
+        mergesort(a,low,mid);
+        mergesort(a,mid+1,high);
+        merge(a,b,low,high,mid);
+    }
+}
+void merge(int a[],int b[],int low,int high,int mid){
+    countmerge++;
+    int i=low,j=mid+1,k=low;
+    while(i<=mid && j<=high){
+        if(a[i]<=a[j]){
+            b[k]=a[i];
+            i++;
+        }
+        else{
+            b[k]=a[j];
+            j++;
+        }
+        k++;
+    }
+    if(i>mid){
+        for(int x=j;x<=high;x++){
+            b[k]=a[k];
+            k++;
+        }
+    }
+    else{
+        for(int x=i;x<=mid;x++){
+            b[k]=a[x];
+            k++;
+        }
+    }
+    for(int x=low;x<=high;x++)
+        a[x]=b[x];
+    
+}
