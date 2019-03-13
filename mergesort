@@ -35,7 +35,7 @@ void merge(int a[],int b[],int low,int high,int mid){
     }
     if(i>mid){
         for(int x=j;x<=high;x++){
-            b[k]=a[k];
+            b[k]=a[x];
             k++;
         }
     }
