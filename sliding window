@@ -1,0 +1,19 @@
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[]={1, 4, 2, 10, 23, 3, 1, 0, 20};
+    int k=4;
+    int n=9;
+    int curr=0,i,windo=0;
+    for(i=0;i<k;i++){
+        windo+=arr[i];
+    }
+    int max=windo;
+    for(i=k;i<n;i++){
+        curr=windo+arr[i]-arr[i-k];
+        windo=curr;
+        if(max<curr)
+          max=curr;
+    }
+    cout<<max;
+}
