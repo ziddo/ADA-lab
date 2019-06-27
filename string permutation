@@ -1,0 +1,50 @@
+#include <iostream>
+#include<string>
+#include <set> 
+#include <iterator> 
+using namespace std;
+
+void permute(string  ,string ,set<string>& );
+int main() {
+	int t;
+	cin>>t;
+
+	while(t--){
+	    string str;	set<string> s;
+	    cin>>str;
+	    permute("",str,s);
+	     set <string > :: iterator itr; 
+	     for (itr = s.begin(); itr != s.end(); ++itr)  { 
+               cout<<*itr<<" "; 
+           } 
+	    cout<<endl;
+	}
+	return 0;
+}
+void permute(string prefix,string str,set<string> &s){
+  int n = str.length();
+if (n == 0)
+s.insert(prefix);
+else {
+for (int i = 0; i < n; i++){
+   char c=str[i];
+   prefix+=c;
+   str.erase(i,1);
+   permute(prefix,str,s);
+    str.insert(i,1,c);
+    prefix.erase(prefix.length()-1,1);
+}
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
