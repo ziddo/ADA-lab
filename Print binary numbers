@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+void printbi(int n,string prefix=""){
+    cout<<"printbi("<<n<<", "<<prefix<<" )"<<endl;
+    if(n==0){
+        cout<<prefix<<endl;
+    }
+    else{
+        printbi(n-1,prefix+"0");
+        printbi(n-1,prefix+"1");
+    }
+}
+int main()
+{
+   int n;
+   cin>>n;
+   printbi(n);
+
+    return 0;
+}
