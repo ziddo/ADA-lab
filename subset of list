@@ -1,0 +1,44 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include <iterator>
+#include<set>
+using namespace std;
+//void helper(vector<string> ,vector<string>);
+void helper(vector<string>& v,vector<string>&chosen){
+    if(v.empty()){
+        vector<string>::iterator it;
+        for(it=chosen.begin();it!=chosen.end();*it++)
+         cout<<*it<<" ";
+         cout<<endl;
+    }
+    else{
+      string first=v[0];
+      v.erase(v.begin());
+      chosen.push_back(first);
+      helper(v,chosen);
+      int t=chosen.size()-1;
+      chosen.erase(chosen.begin()+t);
+      helper(v,chosen);
+      v.insert(v.begin()+0,first);
+    }
+}
+
+void sublists(vector<string>&v){
+    vector<string>chosen;
+    helper(v,chosen);
+}
+
+
+int main(){
+    vector <string> v{"lok","dan",};
+  /*  for(int i=0;i<4;i++){
+        string str;
+        getline(cin,str);
+        v.push_back(str);
+        cin.ignore();
+    }*/
+    sublists(v);
+
+    return 0;
+}
