@@ -1,0 +1,45 @@
+//phle graph pe dfs use kiya or node k saare child expore ho jaane k bad usko stack m store kiya.Fir hmne graph ko reverse
+//kiya ab humne stack use krke fir se dfs use kiya or count kiya.
+
+
+void dfs(vector<int> adj[],stack<int> &s,vector<bool>  &visi,int src){
+    visi[src]=true;
+    for(int i=0;i<adj[src].size();i++){
+        if(!visi[adj[src][i]])
+          dfs(adj,s,visi,adj[src][i]);
+    }
+    s.push(src);
+}
+void dfs1(vector<int> ad[],int src,vector<bool> &visi){
+    visi[src]=true;
+    for(int i=0;i<ad[src].size();i++){
+        if(!visi[ad[src][i]])
+          dfs1(ad,ad[src][i],visi);
+    }
+}
+int kosaraju(int V, vector<int> adj[]){
+    vector<bool> visi(V,false);
+    stack<int> s;
+    for(int i=0;i<V;i++){
+        if(!visi[i])
+        dfs(adj,s,visi,i);
+    }
+    vector<int> ad[V];
+    for(int i=0;i<V;i++){
+        for(int j=0;j<adj[i].size();j++){
+            ad[adj[i][j]].push_back(i);
+        }
+    }
+    for(int i=0;i<V;i++)
+     visi[i]=false;
+    int ans=0;
+    while(!s.empty()){
+        int t=s.top();s.pop();
+       if(visi[t]==false){
+            dfs1(ad,t,visi);  ans++;
+       }
+      
+    }
+    return ans;
+    
+}
