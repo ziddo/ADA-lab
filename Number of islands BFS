@@ -1,0 +1,37 @@
+void bfs(vector<int> arr[],int i,int j,int n,int m){
+    queue<pair<int,int>> q;
+   // int n=arr.size(),m=arr[0].size();
+    int row[8]={-1,0,1,1,1,0,-1,-1};
+   int col[8]={1,1,1,0,-1,-1,-1,0};
+   arr[i][j]=-1;
+    q.push(make_pair(i,j));
+    while(!q.empty()){
+        int x=q.front().first,y=q.front().second;
+        q.pop();
+       
+        arr[x][y]=-1;
+        for(int w=0;w<8;w++){
+            if((x+row[w]>=0 && x+row[w]<n) && (y+col[w]>=0 && y+col[w]<m)){
+                if(arr[x+row[w]][y+col[w]]==1){
+                     q.push(make_pair(x+row[w],y+col[w]));
+                     arr[x+row[w]][y+col[w]]=-1;
+                }
+            }
+        }
+    }
+}
+
+
+int findIslands(vector<int> arr[], int n, int m) {
+
+    int ans=0;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(arr[i][j]==1){
+                bfs(arr,i,j,n,m);
+                ans++;
+            }
+        }
+    }
+    return ans;
+}
