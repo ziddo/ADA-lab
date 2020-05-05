@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+void helper(vector<int> adj[],int u,vector<bool> & visi,vector<int> & disc,vector<int>&low,vector<int> &pare,vector<bool> &ap){
+    static int time=0;
+    visi[u]=true;
+    low[u]=disc[u]=time++;
+    int clid=0;
+    for(auto x=adj[u].begin();x!=adj[u].end();x++){
+        int v=*x;
+        if(!visi[v]){
+            clid++;
+            pare[v]=u;
+            helper(adj,v,visi,disc,low,pare,ap);
+            low[u]=min(low[u],low[v]);
+            if(pare[u]==-1 && clid>1)
+             ap[u]=true;
+            if(pare[u]!=-1 && low[v]>=disc[u])
+             ap[u]=true;
+            
+        }
+        else if(v!=pare[u])
+          low[u]=min(low[u],disc[v]);
+    }
+}
+
+
+void art(vector<int> adj[],int n){
+    vector<bool> visi(n,false);
+    vector<int> disc(n,-1);
+    vector<int> low(n,-1);
+    vector<int> pare(n,-1);
+    vector<bool> ap(n,false);
+    for(int i=0;i<n;i++){
+        if(!visi[i]){
+            helper(adj,i,visi,disc,low,pare,ap);
+        }
+    }
+    for(int i=0;i<n;i++){
+        if(ap[i]==true)
+         cout<<i<<" ";
+    }
+}
+int main(){
+    int n;
+    cin>>n;
+    vector<int> adj[n];
+    for(int i=0;i<n;i++){
+        int x,y;
+        cin>>x>>y;
+        adj[x].push_back(y);
+        adj[y].push_back(x);
+    }
+    art(adj,n);
+    return 0;
+}
