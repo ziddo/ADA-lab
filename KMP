@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    string text="abxabcabcaby";
+    string pat="abcaby";
+    int n=pat.length();
+    vector<int> lps(n,0);
+    int i=1,j=0;
+    while(i<n){
+        if(pat[i]==pat[j]){
+            lps[i]=j+1;
+            i++;j++;
+        }
+        else{
+            if(j!=0){
+                j=lps[j-1];
+            }
+            else{
+                lps[i]=0;
+                i++;
+            }
+        }
+    }
+    
+    i=0;j=0;
+    while(i<text.length() && j<n){
+        if(text[i]==pat[j]){
+            i++;j++;
+        }
+        else{
+            if(j!=0){
+                j=lps[j-1];
+            }
+            else
+             i++;
+        }
+    }
+    if(j==n)
+     cout<<"found";
+    return 0;
+}
