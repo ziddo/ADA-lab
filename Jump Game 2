@@ -1,15 +1,20 @@
-int jump=arr[0],lar=arr[0],step=0;
-for(int i=1;i<n;i++){
-    if(i==n-1)
-     return step;
-    if(lar<arr[i]+i){
-        lar=arr[i]+i;
+int Solution::jump(vector<int> &arr){
+    int n=arr.size();
+    if(n<2)
+     return 0;
+    int jump=0,lar=0,step=0;
+    for(int i=0;i<n;i++){
+        if(i==n-1)
+         return step;
+        if(lar<=i+arr[i])
+          lar=i+arr[i];
+         if(jump==0){
+             step++;
+             jump=lar-i;
+             if(jump==0)
+              return -1;
+         }
+          jump--;
     }
-    jump--;
-    if(jump==0){
-        jump=lar-i;
-        step++;
-    }
-    
+    return step;
 }
-return step;
