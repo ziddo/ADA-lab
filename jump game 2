@@ -1,0 +1,15 @@
+int jump=arr[0],lar=arr[0],step=0;
+for(int i=1;i<n;i++){
+    if(i==n-1)
+     return step;
+    if(lar<arr[i]+i){
+        lar=arr[i]+i;
+    }
+    jump--;
+    if(jump==0){
+        jump=lar-i;
+        step++;
+    }
+    
+}
+return step;
