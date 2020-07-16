@@ -1,0 +1,16 @@
+int find(TreeNode *root,int & ans){
+     if(root==NULL)
+      return -99999;
+     int l=0,r=0,temp=-99999;
+     l=find(root->left,ans);
+     r=find(root->right,ans);
+     temp=max(root->val,max(max(l,r),max(max(l,r)+root->val,l+r+root->val)));
+     ans=max(ans,temp);
+     return max(root->val,max(l,r)+root->val);
+ }
+int Solution::maxPathSum(TreeNode* root){
+    int ans=-99999;
+    int t=find(root,ans);
+    return ans;
+    
+}
